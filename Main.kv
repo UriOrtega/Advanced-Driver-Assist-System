@@ -1,0 +1,69 @@
+<MainScreen>:
+    name: "ADAS"
+
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Advanced Driving Assist System View"
+            pos_hint: {"x":0.0, "y":0.8}
+            size_hint: 1.0, .08
+            font_size: 20
+
+        Image:
+            id: vid
+            size_hint: 1, 1
+            allow_stretch: True
+            keep_ratio: True
+            pos_hint: {'center_x':0.5, 'top':0.8}
+
+        BoxLayout:
+            size_hint: 1.0, 0.3
+            Label:
+                id: l1
+                text: "Left Lane Position"
+                visible: False
+                size_hint: .25,.25
+                opacity: 1 if self.visible else 0
+                font_size: 10
+            Slider:
+                id:lSlider
+                visible: False
+                size_hint_x: 1 if self.visible else 0
+                opacity: 1 if self.visible else 0
+                disabled: not self.visible
+                min: 0
+                max: 900
+                step: 1
+                on_value: app.slide_change(self)
+
+            Label:
+                id: l2
+                text: "Right Lane Position"
+                visible: False
+                size_hint: .25,.25
+                opacity: 1 if self.visible else 0
+                font_size: 10
+
+            Slider:
+                id:rSlider
+                visible: False
+                size_hint_x: 1 if self.visible else 0
+                opacity: 1 if self.visible else 0
+                disabled: not self.visible
+                min: 1000
+                max: 1920
+                step: 1
+                on_value: app.slide_change(self)
+
+
+        BoxLayout:
+            size_hint: 1.0, 0.3
+            Button:
+                id: vidButton
+                text: 'New Video'
+                font_size: 30
+                on_release: app.stop_vid()
+            FileChooserListView:
+                id: list
+                size_hint: 0,0
+                on_selection: app.file_fire_select(*args)
