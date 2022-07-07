@@ -17,7 +17,7 @@ def set_lines(number):
     else:
         width_of_lanes2 = number
 
-def ADAS_sys(vid_file='Videos/solidWhiteRight.mp4'):
+def ADAS_sys(vid_file=''): #Use any driving footage here
     global net, width_of_lanes,width_of_lanes2
     capture = cv.VideoCapture(vid_file)
 
