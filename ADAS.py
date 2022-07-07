@@ -17,7 +17,7 @@ def set_lines(number):
     else:
         width_of_lanes2 = number
 
-def ADAS_sys(vid_file='Videos/Drive.mp4'):
+def ADAS_sys(vid_file='Videos/solidWhiteRight.mp4'):
     global net, width_of_lanes,width_of_lanes2
     capture = cv.VideoCapture(vid_file)
 
@@ -27,10 +27,11 @@ def ADAS_sys(vid_file='Videos/Drive.mp4'):
     while True:
         isTrue, frame = capture.read()
         frame = cv.resize(frame, (1920, 1080))
-        finalLaneDetect = ld.lane_detections(frame, width_of_lanes, width_of_lanes2)
-        obj_detect = cd.object_detection(finalLaneDetect, net)
+        obj_detect = cd.object_detection(frame, net)
+        final_product= ld.lane_detections(obj_detect, width_of_lanes, width_of_lanes2)
 
-        yield obj_detect
+
+        yield final_product
 
 
 # frames = ADAS_sys()
